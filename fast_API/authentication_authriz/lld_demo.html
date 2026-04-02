@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desi Chicken Egg Poultry Farm - LLD</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section h2 {
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 5px;
+        }
+        .subsection {
+            margin-left: 20px;
+        }
+        .subsection h3 {
+            color: #34495e;
+        }
+        .flow-diagram {
+            background: #f4f4f4;
+            padding: 15px;
+            border: 1px solid #ddd;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Low-Level Design (LLD) for Desi Chicken Egg Poultry Farm Website</h1>
+
+    <!-- Section 1: Website Architecture -->
+    <div class="section">
+        <h2>1. Website Architecture</h2>
+        <div class="subsection">
+            <h3>1.1 Frontend</h3>
+            <ul>
+                <li><strong>Homepage:</strong> Displays product highlights, farm story, testimonials, and advertisements.</li>
+                <li><strong>Product Listing Page:</strong> Shows categorized Desi eggs with details (size, price, availability).</li>
+                <li><strong>User Dashboard:</strong> For registered users to view orders, manage subscriptions, and update profiles.</li>
+                <li><strong>Cart & Checkout Page:</strong> Allows users to review items, select delivery options, and make payments.</li>
+                <li><strong>Blog/Information Page:</strong> Provides nutritional benefits, recipes, and farm stories.</li>
+            </ul>
+
+            <h3>1.2 Backend</h3>
+            <ul>
+                <li><strong>User Management:</strong> Handles login/registration, profile updates, and authentication.</li>
+                <li><strong>Product Management:</strong> Manages product listings, categories, and inventory.</li>
+                <li><strong>Order Management:</strong> Processes orders, tracks delivery status, and manages subscriptions.</li>
+                <li><strong>Payment Gateway Integration:</strong> Handles transactions via UPI, cards, wallets, and COD.</li>
+                <li><strong>Notification System:</strong> Sends WhatsApp notifications for order updates and promotions.</li>
+                <li><strong>Feedback & Reviews:</strong> Stores and displays customer reviews and ratings.</li>
+            </ul>
+
+            <h3>1.3 Database</h3>
+            <ul>
+                <li><strong>User Data:</strong> Stores user profiles, login credentials, and preferences.</li>
+                <li><strong>Product Data:</strong> Stores product details, pricing, and inventory.</li>
+                <li><strong>Order Data:</strong> Stores order history, delivery schedules, and payment details.</li>
+                <li><strong>Feedback Data:</strong> Stores customer reviews and ratings.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Section 2: User Flow -->
+    <div class="section">
+        <h2>2. User Flow</h2>
+        <div class="subsection">
+            <h3>2.1 Guest User Flow</h3>
+            <div class="flow-diagram">
+                <p>Homepage → Product Listing → Add to Cart → Checkout (Guest) → Payment → Order Confirmation</p>
+            </div>
+
+            <h3>2.2 Registered User Flow</h3>
+            <div class="flow-diagram">
+                <p>Homepage → Login/Register → Product Listing → Add to Cart → Checkout → Payment → Order Confirmation → Dashboard (View Orders)</p>
+            </div>
+
+            
+        </div>
+    </div>
+
+    <!-- Section 3: Key Features Flow -->
+    <div class="section">
+        <h2>3. Key Features Flow</h2>
+        <div class="subsection">
+            <h3>3.1 Login/Registration</h3>
+            <div class="flow-diagram">
+                <p>User enters email/phone → OTP verification → Account created → Redirect to Dashboard</p>
+            </div>
+
+            <h3>3.2 Product Listing</h3>
+            <div class="flow-diagram">
+                <p>User selects category → Filters products → Views details → Adds to Cart</p>
+            </div>
+
+            <h3>3.3 Order Placement</h3>
+            <div class="flow-diagram">
+                <p>User reviews cart → Selects delivery option → Proceeds to Payment → Order confirmed</p>
+            </div>
+
+            <h3>3.4 WhatsApp Notifications</h3>
+            <div class="flow-diagram">
+                <p>Order placed → Notification sent via WhatsApp API → Delivery updates sent → Promotional messages (opt-in)</p>
+            </div>
+
+            <h3>3.5 Feedback & Reviews</h3>
+            <div class="flow-diagram">
+                <p>User receives product → Leaves review → Review stored in database → Displayed on product page</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 4: Technology Stack -->
+    <div class="section">
+        <h2>4. Technology Stack</h2>
+        <div class="subsection">
+            <h3>4.1 Frontend</h3>
+            <ul>
+                <li>HTML, CSS, JavaScript</li>
+\            </ul>
+
+            <h3>4.2 Backend</h3>
+            <ul>
+                <li>Node.js with Express.js</li>
+                <li>Python (Django/Flask) for business logic</li>
+            </ul>
+
+            <h3>4.3 Database</h3>
+            <ul>
+                <li>MySQL or PostgreSQL for structured data</li>
+                <li>MongoDB for unstructured data (e.g., reviews)</li>
+            </ul>
+
+            <h3>4.4 Payment Gateway</h3>
+            <ul>
+                <li>Razorpay, Paytm, or Stripe for payments</li>
+            </ul>
+
+            <h3>4.5 Notification System</h3>
+            <ul>
+                <li>WhatsApp Business API for notifications</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Section 5: Future Enhancements -->
+    <div class="section">
+        <h2>5. Future Enhancements</h2>
+        <div class="subsection">
+            <ul>
+                <li>Mobile app development for better user engagement.</li>
+                <li>AI-based recommendation engine for personalized product suggestions.</li>
+                <li>Integration with local delivery services for faster delivery.</li>
+                <li>Advanced analytics for tracking user behavior and sales trends.</li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

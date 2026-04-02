@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Animated Candle</title>
+    <style>
+        body {
+            background: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            perspective: 1000px;
+        }
+
+        .candle-container {
+            position: relative;
+            transform-style: preserve-3d;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .candle {
+            position: relative;
+            width: 60px;
+            height: 200px;
+            background: linear-gradient(to right, #8b4513 0%, #a0522d 50%, #8b4513 100%);
+            border-radius: 5px;
+            box-shadow: inset -5px 0px 10px rgba(0,0,0,0.2);
+        }
+
+        .wick {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            width: 4px;
+            height: 20px;
+            background: #2c1603;
+            transform: translateX(-50%);
+        }
+
+        .flame-container {
+            position: absolute;
+            top: -90px;
+            left: 50%;
+            transform: translateX(-50%);
+            filter: blur(1px);
+        }
+
+        .flame {
+            position: relative;
+            width: 25px;
+            height: 60px;
+            background: #ffd700;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: flicker 0.1s infinite, glow 2s infinite;
+            transform-origin: bottom;
+        }
+
+        .flame::after {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            width: 15px;
+            height: 40px;
+            background: #ff4500;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            opacity: 0.7;
+        }
+
+        .glow {
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            width: 100px;
+            height: 100px;
+            background: rgba(255,69,0,0.1);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 50px 20px rgba(255,69,0,0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes flicker {
+            0%, 100% { transform: rotate(-1deg) scale(1); }
+            50% { transform: rotate(1deg) scale(1.05); }
+        }
+
+        @keyframes glow {
+            0%, 100% { opacity: 0.9; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.1); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Smoke effect */
+        .smoke {
+            position: absolute;
+            top: -120px;
+            left: 50%;
+            width: 4px;
+            height: 4px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            animation: smoke 3s forwards;
+        }
+
+        @keyframes smoke {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(-50px, -100px) scale(4); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="candle-container">
+        <div class="glow"></div>
+        <div class="flame-container">
+            <div class="flame"></div>
+        </div>
+        <div class="candle">
+            <div class="wick"></div>
+        </div>
+    </div>
+
+    <script>
+        // Interactive flame effect
+        document.addEventListener('mousemove', (e) => {
+            const flame = document.querySelector('.flame-container');
+            const rect = flame.getBoundingClientRect();
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            
+            const moveX = (e.clientX - centerX) * 0.02;
+            const moveY = (e.clientY - centerY) * 0.02;
+            
+            flame.style.transform = `translateX(-50%) translate(${moveX}px, ${moveY}px)`;
+        });
+
+        // Blow out effect
+        let mouseDown = false;
+        let startY = 0;
+
+        document.addEventListener('mousedown', (e) => {
+            mouseDown = true;
+            startY = e.clientY;
+        });
+
+        document.addEventListener('mouseup', (e) => {
+            if (mouseDown) {
+                const endY = e.clientY;
+                const distance = startY - endY;
+                const speed = distance / (Date.now() - startTime);
+                
+                if (distance > 100 && speed > 0.5) {
+                    blowOutCandle();
+                }
+            }
+            mouseDown = false;
+        });
+
+        function blowOutCandle() {
+            const flame = document.querySelector('.flame');
+            const glow = document.querySelector('.glow');
+            
+            // Create smoke particles
+            for (let i = 0; i < 10; i++) {
+                const smoke = document.createElement('div');
+                smoke.className = 'smoke';
+                document.body.appendChild(smoke);
+                
+                setTimeout(() => smoke.remove(), 3000);
+            }
+            
+            flame.style.animation = 'none';
+            flame.style.opacity = '0';
+            glow.style.opacity = '0';
+        }
+
+        // Double click to relight
+        document.addEventListener('dblclick', () => {
+            const flame = document.querySelector('.flame');
+            const glow = document.querySelector('.glow');
+            
+            flame.style.animation = 'flicker 0.1s infinite, glow 2s infinite';
+            flame.style.opacity = '1';
+            glow.style.opacity = '1';
+        });
+    </script>
+</body>
+</html>
